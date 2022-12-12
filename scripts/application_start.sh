@@ -5,11 +5,10 @@ cd /home/ubuntu/django-app
 
 sudo apt update
 sudo apt -y upgrade
-
-sudo apt install -y python3.9 python3.9-dev python3.9-venv
-python3.9 -m venv venv
+sudo apt install -y python3.8-venv
+python3.8 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
-
-
-gunicorn aws.wsgi:application --bind 0.0.0.0:8000 --daemon
+python3.8 manage.py makemigrations
+python3.8 manage.py migrate
+python3.8 manage.py runserver 0.0.0.0:8000

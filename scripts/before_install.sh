@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DIR="/home/ec2-user/django-app"
+DIR="/home/ubuntu/django-app"
 if [ -d "$DIR" ]; then
     echo "${DIR} exist"
 else
