@@ -32,7 +32,7 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
 
-      - name: Create deployment
+      - name: Create deployment codedeploy
         id: deploy
         run: |
           aws deploy create-deployment \
@@ -40,4 +40,3 @@ jobs:
           --deployment-group-name django_app_group \
           --deployment-config-name CodeDeployDefault.AllAtOnce \
           --github-location repository=${{ github.repository }},commitId=${{ github.sha }}
-          
