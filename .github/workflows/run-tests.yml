@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 name: Build and Deploy
 
 on:
@@ -18,6 +17,3 @@ jobs:
       - name: Install requirements
         run: pip install -r requirements.txt
             
-=======
-
->>>>>>> 620b19878ef498cd1cdc969a8f93408a6b66a1bd
