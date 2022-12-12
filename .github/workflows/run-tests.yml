@@ -1,0 +1,19 @@
+name: Build and Deploy
+
+on:
+  [push]
+
+jobs:
+  build:
+    name: Build and Package
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Update
+        run: sudo apt update
+      - name: Checkout Repository code
+        uses: actions/checkout@v2
+      - name: Install pip
+        run: sudo apt install python3-pip
+      - name: Install requirements
+        run: pip install -r requirements.txt
+            
