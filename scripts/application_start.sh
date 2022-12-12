@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Destination folder
-cd /home/ec2-user/django-app
+cd /home/ubuntu/django-app
 
 sudo apt update
 sudo apt -y upgrade
