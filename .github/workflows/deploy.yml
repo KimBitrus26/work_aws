@@ -33,4 +33,10 @@ jobs:
           aws-region: us-east-1
 
       - name: Create deployment
-        run: aws deploy create-deployment --applilcation-name django_app --deployment-group-name django_app_group --deployment-config-name CodeDeployDefault.AllAtOnce --githup-location repository=${{ github.repository }},commitId=${{ github.sha }}
+        id: deploy
+        run: |
+          aws deploy create-deployment \
+          --application-name django_app \
+          --deployment-group-name django_app_group \
+          --deployment-config-name CodeDeployDefault.AllAtOnce \
+          --githup-location repository=${{ github.repository }},commitId=${{ github.sha }}
