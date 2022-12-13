@@ -1,7 +1,7 @@
 version: "3.7"
 
 services:
-  web:
+  web_backend:
     build:
       context: .
     # command: gunicorn aws.wsgi:application --bind 0.0.0.0:8000 --timeout 120
