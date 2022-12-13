@@ -38,5 +38,5 @@ jobs:
           aws deploy create-deployment \
           --application-name django_app \
           --deployment-group-name django_app_group \
-          --deployment-config-name CodeDeployDefault.AllAtOnce \
+          --deployment-config-name CodeDeployDefault.OneAtATime \
           --github-location repository=${{ github.repository }},commitId=${{ github.sha }}
