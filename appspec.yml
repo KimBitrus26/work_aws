@@ -2,7 +2,7 @@ version: 0.0
 os: linux
 files:
   - source: /
-    destination: /home/ubuntu/django-app
+    destination: /home/ubuntu
     overwrite: true
 file_exists_behavior: RETAIN
 hooks:
@@ -10,17 +10,13 @@ hooks:
     - location: scripts/stop_server.sh
       timeout: 300
       runas: root
-  # BeforeInstall:
-  #   - location: scripts/install_dependencies.sh    
-  #     timeout: 600
-  #     runas: root
   AfterInstall:
-    - location: scripts/install_dependencies.sh    
-      timeout: 600
-      runas: root
-    - location: scripts/after_install.sh
-      timeout: 300
-      runas: root
+    # - location: scripts/install_dependencies.sh    
+    #   timeout: 600
+    #   runas: root
+    # - location: scripts/after_install.sh
+    #   timeout: 300
+    #   runas: root
   ApplicationStart:
     - location: scripts/start_server.sh
       timeout: 1000

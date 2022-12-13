@@ -1,10 +1,11 @@
 #!/bin/bash
 
-cd /home/ubuntu/django-app
+cd /home/ubuntu
 
 # python3.8 -m venv venv
-source venv/bin/activate
+# source venv/bin/activate
 
-# python3.8 manage.py runserver 0.0.0.0:8000
+# # python3.8 manage.py runserver 0.0.0.0:8000
 
-gunicorn aws.wsgi --bind 0.0.0.0:8000 --daemon
+# gunicorn aws.wsgi --bind 0.0.0.0:8000 --daemon
+sudo docker-compose up --build -d --remove-orphans
