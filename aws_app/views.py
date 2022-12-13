@@ -3,4 +3,4 @@ from django.shortcuts import render, HttpResponse
 # Create your views here.
 
 def index(request):
-    return HttpResponse("works again")
+    return HttpResponse("works cicd with docker")
