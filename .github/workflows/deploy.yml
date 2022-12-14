@@ -17,26 +17,39 @@ jobs:
         run: sudo apt install python3-pip
       - name: Install requirements
         run: pip install -r requirements.txt
-      - name: Run django unit test
-        run: python3 manage.py test
-  deploy:
-    needs: build
-    name: Run deployment
-    runs-on: ubuntu-20.04
-    steps:
-    
-      - name: Set aws credentials
-        uses: aws-actions/configure-aws-credentials@v1-node16
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1
-
-      - name: Create deployment
-        id: deploy
+      - name: Create env file
         run: |
-          aws deploy create-deployment \
-          --application-name django_app \
-          --deployment-group-name new_django_app_group \
-          --deployment-config-name CodeDeployDefault.AllAtOnce \
-          --github-location repository=${{ github.repository }},commitId=${{ github.sha }}
+          touch .env
+          echo SECRET_KEY=${SECRET_KEY} >> .env
+          echo DEBUG=${DEBUG} >> .env
+          cat .env
+        env: 
+          SECRET_KEY: ${{ secrets.SECRET_KEY }} 
+          DEBUG: ${{ secrets.DEBUG }} 
+      - name: Create migrations
+        run: python3.8 manage.py makemigrations
+      - name: Run migration
+        run: python3.8 manage.py migrate
+        - name: Run django unit test
+        run: python3 manage.py test
+  # deploy:
+  #   needs: build
+  #   name: Run deployment
+  #   runs-on: ubuntu-20.04
+  #   steps:
+    
+  #     - name: Set aws credentials
+  #       uses: aws-actions/configure-aws-credentials@v1-node16
+  #       with:
+  #         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  #         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  #         aws-region: us-east-1
+
+  #     - name: Create deployment
+  #       id: deploy
+  #       run: |
+  #         aws deploy create-deployment \
+  #         --application-name django_app \
+  #         --deployment-group-name new_django_app_group \
+  #         --deployment-config-name CodeDeployDefault.AllAtOnce \
+  #         --github-location repository=${{ github.repository }},commitId=${{ github.sha }}
